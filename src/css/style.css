@@ -1,0 +1,27 @@
+/*
+ * Samdebug css 1.0
+ * https://github.com/samdebug
+ *
+ * Copyright 2017/07/07, China
+ * 
+ * Licensed under the MIT license:
+ * http://www.opensource.org/licenses/MIT
+ */
+
+/*自定义css*/
+
+
+
+/*loginpage css*/
+.login-page {
+    margin-left: auto;
+    margin-right: auto;
+    width: 360px;
+    padding-top: 130px;
+}
+
+.login-btn {
+    width: 330px;
+}
+
+/* Background */
