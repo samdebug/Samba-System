@@ -3,7 +3,7 @@
 </ul>
 
 <script type="text/ng-template" id="folder-branch-item">
-    <a href="" ng-click="fileNavigator.folderClick(item.item)" class="animated fast fadeInDown">
+    <a href="" ng-click="fileNavigator.folderClick($event,item.item)" class="animated fast fadeInDown">
 
         <span class="point">
             <i class="glyphicon glyphicon-chevron-down" ng-show="isInThisPath(item.name)"></i>
@@ -17,4 +17,4 @@
     <ul class="nav nav-sidebar">
         <li ng-repeat="item in item.nodes" ng-include="'folder-branch-item'" ng-class="{'active': item.name == fileNavigator.currentPath.join('/')}"></li>
     </ul>
-</script>
+</script>·

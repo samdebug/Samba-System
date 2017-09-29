@@ -1,4 +1,18 @@
 <div class="iconset noselect">
+    <div class="topEditBox-icon">
+        <button type="submit" class="btn ng-binding" ng-click="smartClick(singleSelection())" title="{{'open' | translate}}">
+            <i class="glyphicon glyphicon-folder-open"></i>
+        </button>
+        <button type="submit" class="btn ng-binding" ng-click="modal('rename')" title="{{'rename' | translate}}">
+            <i class="glyphicon glyphicon-edit"></i>
+        </button>
+        <button type="submit" class="btn ng-binding" ng-click="modalWithPathSelector('move')" title="{{'move' | translate}}">
+            <i class="glyphicon glyphicon-arrow-right"></i>
+        </button>
+        <button type="submit" class="btn ng-binding" ng-click="modal('remove')" title="{{'remove' | translate}}">
+            <i class="glyphicon glyphicon-trash"></i>
+        </button>
+    </div>
     <div class="item-list clearfix" ng-click="selectOrUnselect(null, $event)" ng-right-click="selectOrUnselect(null, $event)" prevent="true">
         <div class="col-120" ng-repeat="item in $parent.fileList = (fileNavigator.fileList | filter: {model:{name: query}})" ng-show="!fileNavigator.requesting && !fileNavigator.error">
             <a href="" class="thumbnail text-center" ng-click="selectOrUnselect(item, $event)" ng-dblclick="smartClick(item)" ng-right-click="selectOrUnselect(item, $event)" title="{{item.model.name}} ({{item.model.size | humanReadableFileSize}})" ng-class="{selected: isSelected(item)}">

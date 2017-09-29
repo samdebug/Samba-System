@@ -375,17 +375,69 @@
             self.inprocess = true;
             self.error = '';
             $http.post(apiUrl, data).success(function(data, code) {
-                self.deferredHandler(data, deferred, code);
+                if (data.result.success == "false"){
+                    self.deferredHandler(data, deferred, code, $translate.instant('error_login_deny'));
+                }else{
+                    self.deferredHandler(data, deferred, code);
+                }
             }).error(function(data, code) {
-                self.deferredHandler(data, deferred, code, $translate.instant('error_creating_folder'));
+                self.deferredHandler(data, deferred, code, $translate.instant('error_login_deny'));
             })['finally'](function() {
                 self.inprocess = false;
             });
-        
             return deferred.promise;
         };
         
+        ApiHandler.prototype.logout = function() {
+            var self = this;
+            var deferred = $q.defer();
 
+            self.inprocess = true;
+            self.error = '';
+
+            function delCookie(name)
+            {
+            var exp = new Date();
+            exp.setTime(exp.getTime() - 1);
+            var cval=getCookie(name);
+            if(cval!=null)
+            document.cookie= name + "="+cval+";expires="+exp.toGMTString();
+            }
+            function getCookie(name)
+            {
+            var arr,reg=new RegExp("(^| )"+name+"=([^;]*)(;|$)");
+            if(arr=document.cookie.match(reg))
+            return unescape(arr[2]);
+            else
+            return null;
+            }
+            delCookie("user");
+            $window.location = "/";
+        
+            return deferred.promise;
+        };
+
+        ApiHandler.prototype.changePassword = function(apiUrl, items) {
+            var self = this;
+            var deferred = $q.defer();
+            var data = {
+                action: 'changepassword',
+                items: items
+            };
+
+            self.inprocess = true;
+            self.error = '';
+            $http.post(apiUrl, data).success(function(data, code) {
+                self.deferredHandler(data, deferred, code);
+            }).error(function(data, code) {
+                self.deferredHandler(data, deferred, code, $translate.instant('error_change_password'));
+            })['finally'](function() {
+                self.inprocess = false;
+            });
+         
+            return deferred.promise;
+        };
+        
         return ApiHandler;
 
     }]);

@@ -130,11 +130,20 @@
         };
         
         ApiMiddleware.prototype.login = function(item) {
-            console.log(item);
+            //console.log(item);
             //var items = item.fullPath();
             return this.apiHandler.login(fileManagerConfig.loginUrl, item);
         };
+        
+        ApiMiddleware.prototype.logout = function() {
+            return this.apiHandler.logout();
+        };
 
+
+        ApiMiddleware.prototype.changePassword = function(item) {
+            return this.apiHandler.changePassword(fileManagerConfig.changePasswordUrl, item);
+        };
+        
         return ApiMiddleware;
 
     }]);

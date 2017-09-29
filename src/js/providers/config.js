@@ -21,6 +21,7 @@
             compressUrl: 'bridges/php/handler.php',
             extractUrl: 'bridges/php/handler.php',
             permissionsUrl: 'bridges/php/handler.php',
+            changePasswordUrl:'bridges/php/handler.php',
             basePath: '/',
 
             searchForm: true,

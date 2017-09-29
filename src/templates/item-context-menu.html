@@ -55,7 +55,7 @@
             </a>
         </li>
 
-        <li ng-show="config.allowedActions.changePermissions">
+        <!--<li ng-show="config.allowedActions.changePermissions">
             <a href="" tabindex="-1" ng-click="modal('changepermissions')">
                 <i class="glyphicon glyphicon-lock"></i> {{'permissions' | translate}}
             </a>
@@ -65,7 +65,7 @@
             <a href="" tabindex="-1" ng-click="modal('compress')">
                 <i class="glyphicon glyphicon-compressed"></i> {{'compress' | translate}}
             </a>
-        </li>
+        </li>-->
 
         <li ng-show="config.allowedActions.extract && singleSelection() && singleSelection().isExtractable()">
             <a href="" tabindex="-1" ng-click="modal('extract')">

@@ -87,6 +87,10 @@
             error_changing_perms: 'An error occurred changing the permissions of the file',
             error_uploading_files: 'An error occurred uploading files',
             sure_to_start_compression_with: 'Are you sure to compress',
+            error_login:"Please enter your account password",
+            error_login_deny:"Account or password error, login failed",
+            error_password: 'Password cannot be empty',
+            error_password_different: 'Make sure the password is the same as the original password',
             owner: 'Owner',
             group: 'Group',
             others: 'Others',
@@ -100,7 +104,19 @@
             open: 'Open',
             these_elements: 'these {{total}} elements',
             new_folder: 'New folder',
-            download_as_zip: 'Download as ZIP'
+            download_as_zip: 'Download as ZIP',
+            
+            Zexabox:"Zexabox",
+            userName:"User name",
+            password:"Password",
+            login:"Login",
+            Profile:"Change password",
+            LogOut:"Logout",
+            old_passwd:"Old password",
+            new_passwd:"New password",
+            confirm_passwd:"Confirm password",
+            submit:"Submit",
+            sure_to_logout:"Are you sure to logout"
         });
 
         $translateProvider.translations('nl', {
@@ -802,7 +818,7 @@
             hebrew: '希伯来语',
             italian: '意大利',
             slovak: '斯洛伐克语',
-            chinese_tw: '正体中文',
+            chinese_tw: '繁体中文',
             chinese_cn: '简体中文',
             russian: '俄語',
             ukrainian: '烏克蘭',
@@ -844,7 +860,7 @@
             icons: '图标',
             list: '列表',
             name: '名称',
-            size: '尺寸',
+            size: '大小',
             actions: '操作',
             date: '日期',
             selection: '选择',
@@ -873,6 +889,10 @@
             error_getting_content: '获取文件内容出错',
             error_changing_perms: '修改文件权限出错',
             error_uploading_files: '上传文件出错',
+            error_login:"请输入帐号密码",
+            error_login_deny:"帐号或者密码错误，登录失败",
+            error_password: '密码不能为空',
+            error_password_different: '确认密码与原密码不相同，请再次输入密码并确认',
             sure_to_start_compression_with: '确定要压缩？',
             owner: '拥有者',
             group: '群组',
@@ -889,15 +909,17 @@
             new_folder: '新文件夹',
             download_as_zip: '下载的ZIP',
             
-            Zaxabox:"Zaxabox",
+            Zexabox:"Zexabox",
             userName:"用户名",
             password:"密码",
             login:"登录",
-            Profile:"个人资料",
+            Profile:"修改密码",
             LogOut:"登出",
             old_passwd:"旧密码",
             new_passwd:"新密码",
-            confirm_passwd:"确认密码"
+            confirm_passwd:"确认密码",
+            submit:"提交",
+            sure_to_logout:"确定要登出吗"
         });
 
         $translateProvider.translations('zh_tw', {
@@ -911,7 +933,7 @@
             hebrew: '希伯來語',
             italian: '意大利',
             slovak: '斯洛伐克語',
-            chinese_tw: '正體中文',
+            chinese_tw: '繁體中文',
             chinese_cn: '簡體中文',
             russian: '俄語',
             ukrainian: '烏克蘭',

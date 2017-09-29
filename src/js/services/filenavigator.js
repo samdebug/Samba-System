@@ -118,7 +118,16 @@
             }
         };
 
-        FileNavigator.prototype.folderClick = function(item) {
+        FileNavigator.prototype.folderClick = function($event,item) {
+            if ($event != null){
+                var target = ($($event.target).parents("a").length) ? $($event.target).parents("a"):$($event.target);
+                (target.parent('li').hasClass('active')) ? target.siblings('ul').hide():target.siblings('ul').show();
+                target.parent('li').toggleClass('active');
+            }else{
+                $(".file-tree-root").find("ul").each(function(){
+                    $(this).show();
+                })
+            }
             this.currentPath = [];
             if (item && item.isFolder()) {
                 this.currentPath = item.model.fullPath().split('/').splice(1);

@@ -25,26 +25,38 @@
         $scope.logStatus = false;
         
         $scope.$watch('temps', function() {
-            console.log($scope.singleSelection());
             if ($scope.singleSelection()) {
                 $scope.temp = $scope.singleSelection();
             } else {
                 $scope.temp = new Item({rights: 644});
                 $scope.temp.multiple = true;
             }
-            console.log($scope.temp);
             $scope.temp.revert();
         });
         
-        $scope.getUserProfile = function(){
-            var item = $scope.singleSelection();
-            var old_passwd = item.tempModel.old_passwd;
-            var new_passwd = item.tempModel.new_passwd;
-            var confirm_passwd = item.tempModel.confirm_passwd;
+        $scope.apiMiddleware.apiHandler.error = '';
+        
+        $scope.changePassword = function(){
+            var oldPasswd = $scope.temp.tempModel.oldPasswd;
+            var newPasswd = $scope.temp.tempModel.newPasswd;
+            var confirmPasswd = $scope.temp.tempModel.confirmPasswd;
             
-            console.log(old_passwd);
-            console.log(new_passwd);
-            console.log(confirm_passwd);
+            if (!oldPasswd || !newPasswd || !confirmPasswd ) {
+                return $scope.apiMiddleware.apiHandler.error = $translate.instant('error_password');
+            }
+            
+            if ( newPasswd != confirmPasswd ) {
+                return $scope.apiMiddleware.apiHandler.error = $translate.instant('error_password_different');
+            }
+             
+            var item = {"oldPassword":oldPasswd,"newPassword":newPasswd};
+            $scope.apiMiddleware.changePassword(item).then(function() {
+                $scope.fileNavigator.refresh();
+                $scope.modal('changePassword', true);
+            }, function() {
+                return
+            });
+            
             /*var samePath = item.tempModel.path.join('') === item.model.path.join('');
             if (!name || (samePath && $scope.fileNavigator.fileNameExists(name))) {
                 $scope.apiMiddleware.apiHandler.error = $translate.instant('error_invalid_filename');
@@ -57,25 +69,10 @@
         }
         
         $scope.logout = function(){
-            function delCookie(name)
-            {
-            var exp = new Date();
-            exp.setTime(exp.getTime() - 1);
-            var cval=getCookie(name);
-            if(cval!=null)
-            document.cookie= name + "="+cval+";expires="+exp.toGMTString();
-            }
-            function getCookie(name)
-            {
-            var arr,reg=new RegExp("(^| )"+name+"=([^;]*)(;|$)");
-            if(arr=document.cookie.match(reg))
-            return unescape(arr[2]);
-            else
-            return null;
-            }
-
-            delCookie("user");
-            $window.location = "/";
+            $scope.apiMiddleware.logout().then(function() {
+                $scope.fileNavigator.refresh();
+                $scope.modal('logout', true);
+            });
         }
         
         $scope.fileNavigator.onRefresh = function() {
@@ -179,8 +176,11 @@
 
         $scope.smartClick = function(item) {
             var pick = $scope.config.allowedActions.pickFiles;
+            if (!item){
+                return layer.msg("请选择文件");
+            }
             if (item.isFolder()) {
-                return $scope.fileNavigator.folderClick(item);
+                return $scope.fileNavigator.folderClick(null,item);
             }
 
             if (typeof $scope.config.pickCallback === 'function' && pick) {
@@ -224,6 +224,12 @@
         };
 
         $scope.modal = function(id, hide, returnElement) {
+            if (id == "rename" || id == "remove"){
+                var item = $scope.singleSelection();
+                if (!item){
+                    return layer.msg("请选择文件");
+                }
+            }
             var element = $('#' + id);
             element.modal(hide ? 'hide' : 'show');
             $scope.apiMiddleware.apiHandler.error = '';
@@ -232,6 +238,12 @@
         };
 
         $scope.modalWithPathSelector = function(id) {
+            if (id == "move"){
+                var item = $scope.singleSelection();
+                if (!item){
+                    return layer.msg("请选择文件");
+                }
+            }
             $rootScope.selectedModalPath = $scope.fileNavigator.currentPath;
             return $scope.modal(id);
         };
@@ -419,7 +431,7 @@
             
             var item = {"userName":userName,"password":password};
             if (!userName || !password) {
-                return $scope.apiMiddleware.apiHandler.error = $translate.instant('error_invalid_filename');
+                return $scope.apiMiddleware.apiHandler.error = $translate.instant('error_login');
             }
             
             $scope.apiMiddleware.login(item).then(function() {
