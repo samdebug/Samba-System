@@ -437,7 +437,47 @@
          
             return deferred.promise;
         };
-        
+
+        ApiHandler.prototype.getUserData = function(apiUrl,scope) {
+            var self = this;
+            var deferred = $q.defer();
+            var data = {
+                action: 'Nas_getUser'
+            };
+
+            self.inprocess = true;
+            self.error = '';
+
+            $http.post(apiUrl, data).success(function(data, code) {
+                scope.list = data.result;
+            }).error(function(data, code) {
+                self.deferredHandler(data, deferred, code, $translate.instant('error_getting_user'));
+            })['finally'](function() {
+                self.inprocess = false;
+            });
+            return deferred.promise;
+        };
+
+        ApiHandler.prototype.shareDataToUser = function(apiUrl,items) {
+            var self = this;
+            var deferred = $q.defer();
+            var data = {
+                action: 'sharedatatouser',
+                items: items
+            };
+
+            self.inprocess = true;
+            self.error = '';
+            $http.post(apiUrl, data).success(function(data, code) {
+                self.deferredHandler(data, deferred, code);
+            }).error(function(data, code) {
+                self.deferredHandler(data, deferred, code, $translate.instant('error_share_file'));
+            })['finally'](function() {
+                self.inprocess = false;
+            });
+            return deferred.promise;
+        };
+
         return ApiHandler;
 
     }]);

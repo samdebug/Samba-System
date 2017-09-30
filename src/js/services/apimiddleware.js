@@ -143,7 +143,15 @@
         ApiMiddleware.prototype.changePassword = function(item) {
             return this.apiHandler.changePassword(fileManagerConfig.changePasswordUrl, item);
         };
+
+        ApiMiddleware.prototype.getUserData = function(scope) {
+            return this.apiHandler.getUserData(fileManagerConfig.getUserDataUrl,scope);
+        };
         
+        ApiMiddleware.prototype.shareDataToUser = function(item) {
+            return this.apiHandler.shareDataToUser(fileManagerConfig.shareDataToUserUrl, item);
+        };
+
         return ApiMiddleware;
 
     }]);

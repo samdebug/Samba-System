@@ -23,6 +23,8 @@
         $scope.userName = "";
         $scope.password = "";
         $scope.logStatus = false;
+        $scope.share_modal_select_all = false;
+        
         
         $scope.$watch('temps', function() {
             if ($scope.singleSelection()) {
@@ -35,46 +37,7 @@
         });
         
         $scope.apiMiddleware.apiHandler.error = '';
-        
-        $scope.changePassword = function(){
-            var oldPasswd = $scope.temp.tempModel.oldPasswd;
-            var newPasswd = $scope.temp.tempModel.newPasswd;
-            var confirmPasswd = $scope.temp.tempModel.confirmPasswd;
-            
-            if (!oldPasswd || !newPasswd || !confirmPasswd ) {
-                return $scope.apiMiddleware.apiHandler.error = $translate.instant('error_password');
-            }
-            
-            if ( newPasswd != confirmPasswd ) {
-                return $scope.apiMiddleware.apiHandler.error = $translate.instant('error_password_different');
-            }
-             
-            var item = {"oldPassword":oldPasswd,"newPassword":newPasswd};
-            $scope.apiMiddleware.changePassword(item).then(function() {
-                $scope.fileNavigator.refresh();
-                $scope.modal('changePassword', true);
-            }, function() {
-                return
-            });
-            
-            /*var samePath = item.tempModel.path.join('') === item.model.path.join('');
-            if (!name || (samePath && $scope.fileNavigator.fileNameExists(name))) {
-                $scope.apiMiddleware.apiHandler.error = $translate.instant('error_invalid_filename');
-                return false;
-            }
-            $scope.apiMiddleware.rename(item).then(function() {
-                $scope.fileNavigator.refresh();
-                $scope.modal('rename', true);
-            });*/
-        }
-        
-        $scope.logout = function(){
-            $scope.apiMiddleware.logout().then(function() {
-                $scope.fileNavigator.refresh();
-                $scope.modal('logout', true);
-            });
-        }
-        
+
         $scope.fileNavigator.onRefresh = function() {
             $scope.temps = [];
             $scope.query = '';
@@ -224,10 +187,15 @@
         };
 
         $scope.modal = function(id, hide, returnElement) {
-            if (id == "rename" || id == "remove"){
-                var item = $scope.singleSelection();
+            var item = $scope.singleSelection();
+            if (id == "rename" || id == "remove" ){
                 if (!item){
-                    return layer.msg("请选择文件");
+                    return layer.msg($translate.instant('error_no_selection'));
+                }
+            }else if (id == "share"){
+                $scope.getUserData();
+                if (!item){
+                    return layer.msg($translate.instant('error_no_selection'));
                 }
             }
             var element = $('#' + id);
@@ -439,6 +407,109 @@
                 $scope.logStatus = true;
                 $scope.fileNavigator.refresh();
                 //$window.location = "/";
+            });
+        };
+
+        $scope.changePassword = function(){
+            var oldPasswd = $scope.temp.tempModel.oldPasswd;
+            var newPasswd = $scope.temp.tempModel.newPasswd;
+            var confirmPasswd = $scope.temp.tempModel.confirmPasswd;
+            
+            if (!oldPasswd || !newPasswd || !confirmPasswd ) {
+                return $scope.apiMiddleware.apiHandler.error = $translate.instant('error_password');
+            }
+            
+            if ( newPasswd != confirmPasswd ) {
+                return $scope.apiMiddleware.apiHandler.error = $translate.instant('error_password_different');
+            }
+             
+            var item = {"oldPassword":oldPasswd,"newPassword":newPasswd};
+            $scope.apiMiddleware.changePassword(item).then(function() {
+                $scope.fileNavigator.refresh();
+                $scope.modal('changePassword', true);
+            }, function() {
+                return
+            });
+            
+            /*var samePath = item.tempModel.path.join('') === item.model.path.join('');
+            if (!name || (samePath && $scope.fileNavigator.fileNameExists(name))) {
+                $scope.apiMiddleware.apiHandler.error = $translate.instant('error_invalid_filename');
+                return false;
+            }
+            $scope.apiMiddleware.rename(item).then(function() {
+                $scope.fileNavigator.refresh();
+                $scope.modal('rename', true);
+            });*/
+        }
+        
+        $scope.logout = function(){
+            $scope.apiMiddleware.logout().then(function() {
+                $scope.fileNavigator.refresh();
+                $scope.modal('logout', true);
+            });
+        }
+
+        $scope.getUserData = function(){
+            $scope.apiMiddleware.getUserData($scope).then(function() {
+                $scope.modal('share', true);
+            }, function() {
+                return
+            });
+        }
+          
+        $scope.list = [
+            {'id': 101,'name':'sam',"checked":false},
+            {'id': 102,'name':'sam',"checked":false},
+            {'id': 103,'name':'sam',"checked":false},
+            {'id': 104,'name':'sam',"checked":false},
+            {'id': 105,'name':'sam',"checked":false},
+            {'id': 106,'name':'sam',"checked":false},
+            {'id': 107,'name':'sam',"checked":false}
+        ];
+        $scope.share_modal_checked = [];
+        $scope.selectAll = function () {
+            if($scope.share_modal_select_all) {
+                $scope.share_modal_checked = [];
+                angular.forEach($scope.list, function (i) {
+                    i.checked = false;  
+                })
+                $scope.share_modal_checked = [];
+                $scope.share_modal_select_all = false;
+            }else {
+                angular.forEach($scope.list, function (i) {
+                    i.checked = true;
+                    $scope.share_modal_checked.push(i.id);
+                })
+                $scope.share_modal_select_all = true;
+            }
+        };
+        $scope.selectOne = function () {
+            angular.forEach($scope.list , function (i) {
+                var index = $scope.share_modal_checked.indexOf(i.id);
+                if(i.checked && index === -1) {
+                    $scope.share_modal_checked.push(i.id);
+                } else if (!i.checked && index !== -1){
+                    $scope.share_modal_checked.splice(index, 1);
+                };
+            })
+
+            if ($scope.list.length === $scope.share_modal_checked.length) {
+                $scope.select_all = true;
+            } else {
+                $scope.select_all = false;
+            }
+        }
+
+        $scope.shareDataToUser = function() {
+            var userName = $scope.share_modal_checked.join(",");
+            var item = {"userName":userName};
+            console.log(userName);
+            if (!userName ) {
+                return $scope.apiMiddleware.apiHandler.error = $translate.instant('error_share_file');
+            }
+            
+            $scope.apiMiddleware.shareDataToUser(item).then(function() {
+                $scope.fileNavigator.refresh();
             });
         };
        

@@ -22,6 +22,8 @@
             extractUrl: 'bridges/php/handler.php',
             permissionsUrl: 'bridges/php/handler.php',
             changePasswordUrl:'bridges/php/handler.php',
+            getUserDataUrl:'bridges/php/handler.php',
+            shareDataToUserUrl:"bridges/php/handler.php",
             basePath: '/',
 
             searchForm: true,

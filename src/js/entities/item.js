@@ -8,6 +8,7 @@
                 oldPasswd:model && model.oldPasswd || '',
                 confirmPasswd:model && model.confirmPasswd || '',
                 name: model && model.name || '',
+                format: model && model.format || '',
                 path: path || [],
                 type: model && model.type || 'file',
                 size: model && parseInt(model.size || 0),

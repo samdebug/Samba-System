@@ -58,6 +58,27 @@
             self.fileList = [];
             return self.list().then(function(data) {
                 self.fileList = (data.result || []).map(function(file) {
+                    var ext = ['css','js','html','java','hs','ahk','py','txt','json','zip','png','jpg','ico','jpeg','gif','svg','psd','mp3','wav','cda','wma','ra','ape','aac'];
+                    if (file.name.split(".").length > 1 ){
+                        function contains(arr, obj) {
+                          var i = arr.length;
+                          while (i--) {
+                            if (arr[i] === obj) {
+                              return true;
+                            }
+                          }
+                          return false;
+                        }
+                        var format = file.name.split(".")[file.name.split(".").length - 1];
+                        if (contains(ext, format)){
+                            file.format = format;
+                        }else{
+                            file.format = 'unknown';
+                        }
+                    }else{
+                        file.format = "dir"
+                    }
+
                     return new Item(file, self.currentPath);
                 });
                 self.buildTree(path);

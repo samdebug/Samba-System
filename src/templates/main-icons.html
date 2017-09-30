@@ -12,13 +12,31 @@
         <button type="submit" class="btn ng-binding" ng-click="modal('remove')" title="{{'remove' | translate}}">
             <i class="glyphicon glyphicon-trash"></i>
         </button>
+        <button type="submit" class="btn ng-binding" ng-click="modal('share')" title="{{'share' | translate}}">
+            <i class="glyphicon glyphicon-share"></i>
+        </button>
     </div>
-    <div class="item-list clearfix" ng-click="selectOrUnselect(null, $event)" ng-right-click="selectOrUnselect(null, $event)" prevent="true">
+    <div class="item-list clearfix folder-list" ng-click="selectOrUnselect(null, $event)" ng-right-click="selectOrUnselect(null, $event)" prevent="true">
         <div class="col-120" ng-repeat="item in $parent.fileList = (fileNavigator.fileList | filter: {model:{name: query}})" ng-show="!fileNavigator.requesting && !fileNavigator.error">
             <a href="" class="thumbnail text-center" ng-click="selectOrUnselect(item, $event)" ng-dblclick="smartClick(item)" ng-right-click="selectOrUnselect(item, $event)" title="{{item.model.name}} ({{item.model.size | humanReadableFileSize}})" ng-class="{selected: isSelected(item)}">
                 <div class="item-icon">
-                    <i class="glyphicon glyphicon-folder-open" ng-show="item.model.type === 'dir'"></i>
-                    <i class="glyphicon glyphicon-file" data-ext="{{ item.model.name | fileExtension }}" ng-show="item.model.type === 'file'" ng-class="{'item-extension': config.showExtensionIcons}"></i>
+                    <!-- <i class="glyphicon glyphicon-folder-open" ng-show="item.model.type === 'dir'"></i>
+                    <i class="glyphicon glyphicon-file" data-ext="{{ item.model.name | fileExtension }}" ng-show="item.model.type === 'file'" ng-class="{'item-extension': config.showExtensionIcons}"></i> -->
+                    <div class="icon dir" ng-show="item.model.type === 'dir'"></div>
+                    <div class="icon picture" ng-show="item.model.format === 'png' || item.model.format === 'jpg' || item.model.format === 'ico' || item.model.format === 'jpeg' || item.model.format === 'gif' || item.model.format === 'svg' || item.model.format === 'psd'"></div>
+                    <div class="icon audio" ng-show="item.model.format === 'mp3' || item.model.format === 'wav' || item.model.format === 'cda' || item.model.format === 'wma' || item.model.format === 'ra' || item.model.format === 'ape' || item.model.format === 'aac'"></div>
+                    
+                    <div class="multi-icon" ng-show="item.model.format === 'unknown'"></div>
+                    <div class="multi-icon css" ng-show=" item.model.format=== 'css'"></div>
+                    <div class="multi-icon js" ng-show="item.model.format === 'js'"></div>
+                    <div class="multi-icon html" ng-show="item.model.format === 'html'"></div>
+                    <div class="multi-icon java" ng-show="item.model.format === 'java'"></div>
+                    <div class="multi-icon hs" ng-show="item.model.format === 'hs'"></div>
+                    <div class="multi-icon ahk" ng-show="item.model.format === 'ahk'"></div>
+                    <div class="multi-icon py" ng-show="item.model.format === 'py'"></div>
+                    <div class="multi-icon txt" ng-show="item.model.format === 'txt'"></div>
+                    <div class="multi-icon json" ng-show="item.model.format === 'json'"></div>
+                    <div class="multi-icon zip" ng-show="item.model.format === 'zip'"></div>
                 </div>
                 {{item.model.name | strLimit : 11 }}
             </a>

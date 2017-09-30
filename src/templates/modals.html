@@ -34,7 +34,7 @@
         <h4 class="modal-title">{{"confirm" | translate}}</h4>
       </div>
       <div class="modal-body">
-        {{'sure_to_delete' | translate}} <span ng-include data-src="'selected-files-msg'"></span>
+        {{'sure_to_delete' | translate}} <strong ng-include data-src="'selected-files-msg'"></strong>
 
         <div ng-include data-src="'error-bar'" class="clearfix"></div>
       </div>
@@ -421,6 +421,62 @@
         <button type="submit" class="btn btn-primary" ng-disabled="apiMiddleware.apiHandler.inprocess" autofocus="autofocus">{{"remove" | translate}}</button>
       </div>
       </form>
+    </div>
+  </div>
+</div>
+
+<div class="modal animated fadeIn" id="share">
+  <div class="modal-dialog">
+    <div class="modal-content">
+        <form ng-submit="shareDataToUser()">
+            <div class="modal-header">
+              <button type="button" class="close" data-dismiss="modal">
+                  <span aria-hidden="true">&times;</span>
+                  <span class="sr-only">{{"close" | translate}}</span>
+              </button>
+              <h4 class="modal-title">{{'share' | translate}}</h4>
+            </div>
+            <div class="modal-body animated scrollable-menu" style="max-height: 500px;">
+              <div ng-show="apiMiddleware.apiHandler.inprocess">
+                  <div ng-include="config.tplPath + '/spinner.html'"></div>
+              </div>
+              <div ng-show="!apiMiddleware.apiHandler.inprocess">
+                <p>{{'selection' | translate}} <strong ng-include data-src="'selected-files-msg'"></strong></p>
+                <p>{{"share_tips" | translate}}</p>
+                <div ng-include data-src="'error-bar'" class="clearfix"></div>
+                <table class="table mb0 table-files noselect">
+                  <thead>
+                      <tr>
+                          <th>
+                              <input type="checkbox" ng-model="select_all" ng-change="selectAll()"/>
+                          </th>
+                          <th>
+                              <a href="">
+                                  {{"user_name" | translate}}
+                              </a>
+                          </th>
+                      </tr>
+                  </thead>
+                  <tbody class="file-item">
+                      <tr class="item-list" ng-repeat="item in list">
+                          <td>
+                              <input type="checkbox" ng-model="item.checked" ng-change="selectOne()" />
+                          </td>
+                          <td>
+                              <span>
+                                  {{item.name}}
+                              </span>
+                          </td>
+                      </tr>
+                  </tbody>
+                </table>
+              </div>
+            </div>
+            <div class="modal-footer">
+              <button type="button" class="btn btn-default" data-dismiss="modal" ng-disabled="apiMiddleware.apiHandler.inprocess">{{"cancel" | translate}}</button>
+              <button type="submit" class="btn btn-primary" ng-disabled="apiMiddleware.apiHandler.inprocess">{{"submit" | translate}}</button>
+            </div>
+        </form>
     </div>
   </div>
 </div>

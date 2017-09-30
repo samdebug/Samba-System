@@ -58,12 +58,12 @@ textarea.code {
 
 .sidebar {
   display: none;
-  background: #fafafa;
+  background: #f5f7fa;
   margin-top: 2px;
   padding: 0;
   overflow-x: hidden;
   overflow-y: auto;
-  border-right: 1px solid #eee;
+  border-right: 1px solid #e6e9f0;
 }
 
 .btn-go-back {
@@ -78,7 +78,7 @@ textarea.code {
 
 
 .nav-sidebar > li > a {
-  color: #7a7a7a;
+  color: #8d9199;
   padding: 7px 0 7px 16px;
 }
 
@@ -105,7 +105,7 @@ textarea.code {
 .file-tree ul.nav.nav-sidebar {
   margin: 0;
   padding: 0;
-  padding-left: 12px;
+  padding-left: 25px;
 }
 
 .file-tree ul.nav.nav-sidebar:first-child {
@@ -132,11 +132,12 @@ textarea.code {
 }
 
 .col-120 {
-  width: 100px;
+  width: 130px;
   max-height: 100px;
   float: left;
-  margin-bottom: 9px;
-  margin-right: 9px;
+  margin-bottom: 60px;
+  /*margin-bottom: 9px;
+  margin-right: 20px;*/
 }
 
 .col-120:last-child {
@@ -160,17 +161,23 @@ textarea.code {
   padding: 10px 0;
   border: none;
   background: none;
+  color: #7a7a7a;
 }
 
 .table-files .selected,
 .iconset .thumbnail.selected {
-  background: #2196F3;
+  background: #eee;
+  border: 1px solid #e4e2e2 !important;
+}
+
+a.thumbnail:hover, a.thumbnail:focus, a.thumbnail.active {
+    border-color: #e2e2e2;
 }
 
 .iconset .thumbnail.selected,
 .table-files .selected td,
 .table-files .selected td a {
-  color:#fff;
+  /*color:#fff;*/
 }
 
 .iconset .thumbnail .item-icon {
@@ -417,14 +424,14 @@ table th > a:focus {
 
 .breadcrumb>.active,
 .breadcrumb a {
-  color: #fff;
+  color: #2196f3;
 }
 
 .breadcrumb>li+li:before {
   font-family: 'Glyphicons Halflings';
   content: "\e080";
   font-size: 12px;
-  color: #fff;
+  color: #2196f3;
 }
 
 .scrollable-menu {
@@ -435,7 +442,7 @@ table th > a:focus {
 
 .btn.btn-flat {
   background: none;
-  color: #fff;
+  color: #2196f3;
 }
 
 .btn-group.open > .btn-flat,
@@ -453,15 +460,15 @@ table th > a:focus {
 
 
 .topEditBox-icon{
-    background: #fafafa;
-    margin-left: -10px;
+    /*background: #fafafa;
+    /*margin-left: -10px;*/
     border-bottom: 1px solid #eee;
     padding: 10px;
     margin-top: -10px;
 }
 
 .topEditBox-list{
-    background: #fafafa;
+    /*background: #fafafa;*/
     border-bottom: 1px solid #eee;
     padding: 10px;
 }
@@ -479,3 +486,61 @@ table th > a:focus {
     -webkit-box-shadow: 0 0px 0px rgba(0,0,0,0.3);
     box-shadow: 0 0px 0px rgba(0,0,0,0.3);
 }
+
+.thumbnail:hover {
+    background-color: #eee;
+}
+    
+.folder-list {
+  padding-top: 10px;
+  padding-left: 0px;
+}
+
+.navbar-inverse {
+    background-color: #ffffff;
+    border-bottom: 1px solid #e2e2e2 !important;
+}
+
+.item-icon .icon {
+    width: 3.5em;
+    height: 3.5em;
+    background-image: url(https://picturelements.github.io/images/win_icons/filesprite2.png) !important;
+    background-size: 1100% 100%;
+    position: relative;
+    top: 50%;
+    left: 50%;
+    margin-left: -1.75em;
+}
+
+.item-icon .multi-icon {
+    width: 3.5em;
+    height: 3.5em;
+    background-image: url(https://picturelements.github.io/images/win_icons/filesprite.png) !important;
+    background-size: 1100% 100%;
+    position: relative;
+    top: 50%;
+    left: 50%;
+    margin-left: -1.75em;
+}
+
+.item-icon .dir {background-position: 30% 0;}
+.item-icon .audio {background-position:10% 0;}
+.item-icon .font {background-position:20% 0;}
+
+.item-icon .css {background-position:10% 0;}
+.item-icon .js {background-position:20% 0;}
+.item-icon .html {background-position:30% 0;}
+.item-icon .java {background-position:40% 0;}
+.item-icon .hs {background-position:50% 0;}
+.item-icon .ahk {background-position:60% 0;}
+.item-icon .py {background-position:70% 0;}
+.item-icon .txt {background-position:80% 0;}
+.item-icon .json {background-position:90% 0;}
+.item-icon .zip {background-position:100% 0;}
+
+
+/*.nav-sidebar li:hover{
+    color: #2f3033;
+    border-left-color: #008afe;
+    background-color: #e1edfa;
+}*/

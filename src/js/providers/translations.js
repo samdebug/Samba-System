@@ -73,6 +73,7 @@
             edit: 'Edit',
             copy: 'Copy',
             rename: 'Rename',
+            share: 'Share',
             extract: 'Extract',
             compress: 'Compress',
             error_invalid_filename: 'Invalid filename or already exists, specify another name',
@@ -116,7 +117,16 @@
             new_passwd:"New password",
             confirm_passwd:"Confirm password",
             submit:"Submit",
-            sure_to_logout:"Are you sure to logout"
+            sure_to_logout:"Are you sure to logout",
+            recoveryStation:"Recovery Station",
+            sharedResourceManagement:"Shared Resource Management",
+            fileManagement:"File Management",
+            user_name:"User Name",
+            error_getting_user:"Failed to get user",
+            error_share_file:"Failed to share files",
+            share_tips:"Select user to share:",
+            selected_file:"Selected File:",
+            error_no_selection:"No selection"
         });
 
         $translateProvider.translations('nl', {
@@ -872,6 +882,7 @@
             move: '移动',
             download: '下载',
             view_item: '查看子项',
+            share: '分享',
             remove: '删除',
             edit: '编辑',
             copy: '复制',
@@ -919,7 +930,16 @@
             new_passwd:"新密码",
             confirm_passwd:"确认密码",
             submit:"提交",
-            sure_to_logout:"确定要登出吗"
+            sure_to_logout:"确定要登出吗",
+            recoveryStation:"资源回收站",
+            sharedResourceManagement:"分享资源管理",
+            fileManagement:"资源文件",
+            user_name:"用户名",
+            error_getting_user:"获取用户失败",
+            error_share_file:"分享失败",
+            share_tips:"选择分享的用户名：",
+            selected_file:"选中的文件名：",
+            error_no_selection:"请选择文件"
         });
 
         $translateProvider.translations('zh_tw', {
@@ -987,6 +1007,7 @@
             move: '移動',
             download: '下載',
             view_item: '檢視',
+            share: '分享',
             remove: '刪除',
             edit: '存檔',
             copy: '複製',
@@ -1018,7 +1039,17 @@
             open: '開啟',
             these_elements: '共 {{total}} 個',
             new_folder: '新資料匣',
-            download_as_zip: '以ZIP下載'
+            download_as_zip: '以ZIP下載',
+            recoveryStation:"資源回收站",
+            sharedResourceManagement:"分享資源管理",
+            fileManagement:"資源文件",
+            user_name:"用戶名",
+            error_getting_user:"獲取用戶失敗",
+            error_share_file:"分享失敗",
+            submit:"提交",
+            share_tips:"選擇分享的用戶名：",
+            selected_file:"選中的文件名：",
+            error_no_selection:"請選擇文件"
         });
 
         $translateProvider.translations('ru', {
