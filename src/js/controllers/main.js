@@ -26,6 +26,7 @@
         $scope.share_modal_select_all = false;
         
         
+        //git refresh
         $scope.$watch('temps', function() {
             if ($scope.singleSelection()) {
                 $scope.temp = $scope.singleSelection();
